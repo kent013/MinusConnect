@@ -31,7 +31,7 @@
 
 #pragma mark - api
 - (MinusRequest *) activeUserWithDelegate:(id<MinusRequestDelegate>) delegate;
-- (MinusRequest *) foldersWithDelegate:(id<MinusRequestDelegate>) delegate;
+- (MinusRequest *) foldersWithUsername:(NSString *)username andDelegate:(id<MinusRequestDelegate>) delegate;
 - (MinusRequest *) createFileWithDelegate:(id<MinusRequestDelegate>) delegate;
-- (MinusRequest *) createFolderWithDelegate:(id<MinusRequestDelegate>) delegate;
+- (MinusRequest *) createFolderWithUsername:(NSString *)username name:(NSString *)name isPublic:(BOOL) isPublic andDelegate:(id<MinusRequestDelegate>) delegate;
 @end

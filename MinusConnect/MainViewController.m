@@ -46,6 +46,8 @@
 
 - (void) handleTestButtonTapped:(UIButton *)sender{
     [minus_ activeUserWithDelegate:self];
+    [minus_ foldersWithUsername:@"kent013" andDelegate:self];
+    //[minus_ createFolderWithUsername:@"kent013" name:@"test" isPublic:YES andDelegate:self];
 }
 
 - (void) handleLogoutButtonTapped:(UIButton *)sender{

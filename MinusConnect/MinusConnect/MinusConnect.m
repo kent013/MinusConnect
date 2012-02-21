@@ -272,7 +272,10 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 /*!
  * get folders
  */
-- (MinusRequest *)foldersWithDelegate:(id<MinusRequestDelegate>) delegate{
+- (MinusRequest *)foldersWithUsername:(NSString *)username andDelegate:(id<MinusRequestDelegate>) delegate{
+    NSString *path = [NSString stringWithFormat:@"users/%@/folders", username];
+    MinusRequest *request = [self createRequestWithURLString:path param:nil httpMethod:@"GET" andDelegate:delegate];
+    [request start];
     return nil;
 }
 
@@ -286,7 +289,11 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 /*!
  * create folder
  */
-- (MinusRequest *)createFolderWithDelegate:(id<MinusRequestDelegate>) delegate{
+- (MinusRequest *)createFolderWithUsername:(NSString *)username name:(NSString *)name isPublic:(BOOL)isPublic andDelegate:(id<MinusRequestDelegate>)delegate{
+    NSString *path = [NSString stringWithFormat:@"users/%@/folders", username];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", [NSNumber numberWithBool:isPublic], "is_public", nil];
+    MinusRequest *request = [self createRequestWithURLString:path param:param httpMethod:@"POST" andDelegate:delegate];
+    [request start];
     return nil;
 }
 @end
