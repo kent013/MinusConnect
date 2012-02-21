@@ -14,11 +14,10 @@
 
 @protocol MinusAuthDelegate;
 
-
 /*!
  * minus auth object
  */
-@interface MinusAuth : NSObject<LROAuth2ClientDelegate>{
+@interface MinusAuth : NSObject<LROAuth2ClientDelegate, NSURLConnectionDelegate>{
   @protected
     __strong NSString *callbackScheme_;
     __strong NSString *clientId_;
@@ -27,10 +26,13 @@
     __strong LROAuth2Client *client_;
     __strong LROAuth2AccessToken *accessToken_;
     
-    __strong MinusAuthWebViewController *authViewController_;
-    __strong UIWebView *webView_;
+    __strong NSMutableData *data_;
+    //__strong MinusAuthWebViewController *authViewController_;
+    //__strong UIWebView *webView_;
     id<MinusAuthDelegate> delegate_;
 }
+
+@property (nonatomic, readonly) LROAuth2AccessToken *credential;
 
 - (id)initWithClientId:(NSString *)clientId 
           clientSecret:(NSString *)clientSecret 

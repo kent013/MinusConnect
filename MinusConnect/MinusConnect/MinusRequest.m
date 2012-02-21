@@ -7,6 +7,7 @@
 //
 
 #import "MinusRequest.h"
+#import "SBJson.h"
 
 //-----------------------------------------------------------------------------
 //Private Implementations
@@ -119,6 +120,20 @@
 {
     if([self.delegate respondsToSelector:@selector(request:didLoadRawResponse:)]){
         [self.delegate request:self didLoadRawResponse:data_];
+    }
+    
+    NSError *parseError = nil; 
+    SBJsonParser *parser = [[SBJsonParser alloc] init];
+    NSDictionary *parsedData = [parser objectWithData:data_];
+    
+    if (parseError) {
+        if([self.delegate respondsToSelector:@selector(request:didFailWithError:)]){
+            [self.delegate request:self didFailWithError:parseError];
+        }
+        return;
+    }  
+    if([self.delegate respondsToSelector:@selector(request:didLoad:)]){
+        [self.delegate request:self didLoad:parsedData];
     }
 }
 

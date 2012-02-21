@@ -7,7 +7,6 @@
 //
 
 #import "MinusAuth.h"
-#import "PDKeychainBindings.h"
 #import "NSString+Join.h"
 
 //-----------------------------------------------------------------------------
@@ -25,6 +24,8 @@
 //-----------------------------------------------------------------------------
 #pragma mark - authentication
 @implementation MinusAuth
+@synthesize credential = accessToken_;
+
 /*!
  * initialize
  */
@@ -66,15 +67,24 @@
         [navigationController pushViewController:authViewController_ animated:YES];
     }else{
         [viewController presentModalViewController:authViewController_ animated:YES];
-    }*/
+    }
     webView_ = [[UIWebView alloc] init];
+    [client_ authorizeUsingWebView:webView_ additionalParameters:params];
+    */
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSString join:permission glue:@" "], @"scope", 
                             @"password", @"grant_type", 
                             username, @"username",
                             password, @"password",
                             clientSecret_, @"client_secret", nil];
-    [client_ authorizeUsingWebView:webView_ additionalParameters:params];
-    //[client_ userAuthorizationRequestWithParameters:params];
+
+    NSURLRequest *request = [client_ userAuthorizationRequestWithParameters:params];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
+    
+    if(connection == nil){
+        [self minusDidNotLogin];
+        return;
+    }
+    [connection start];
 }
 
 /*!
@@ -111,16 +121,18 @@
  * clear access token
  */
 - (void)clearCredential{
-    PDKeychainBindings *bindings = [PDKeychainBindings sharedKeychainBindings];
-    [bindings removeObjectForKey:kMinusAccessToken];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
+    [defaults removeObjectForKey:kMinusAccessToken];
+    [defaults synchronize];
+    accessToken_ = nil;
 }
 
 /*!
  * load credential
  */
 - (void)loadCredential{
-    PDKeychainBindings *bindings = [PDKeychainBindings sharedKeychainBindings];
-    NSData *data = [[bindings objectForKey:kMinusAccessToken] dataUsingEncoding:NSASCIIStringEncoding];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
+    NSData *data = [defaults objectForKey:kMinusAccessToken];
     if(data != nil){
         accessToken_ = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
@@ -130,8 +142,9 @@
  * save credential
  */
 - (void)saveCredential{
-    PDKeychainBindings *bindings = [PDKeychainBindings sharedKeychainBindings];
-    [bindings setObject:[[NSString alloc] initWithData:[NSKeyedArchiver archivedDataWithRootObject:accessToken_] encoding:NSASCIIStringEncoding] forKey:kMinusAccessToken];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];    
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:accessToken_];
+    [defaults setValue:data forKey:kMinusAccessToken];
 }
 
 /*!
@@ -150,6 +163,46 @@
     return [accessToken_ hasExpired];
 }
 
+#pragma mark - NSURLConnectionDelegate
+#pragma mark - NSURLConnection[Data]Delegate methods
+/*!
+ * did receive response
+ */
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
+    data_ = [[NSMutableData alloc] init];
+    
+    NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
+    NSInteger statusCode = [httpResponse statusCode];
+    if (statusCode != 200) {
+        [connection cancel];
+        NSLog(@"%s:HTTP Response is %d", __PRETTY_FUNCTION__, statusCode);
+        return;
+    }
+}
+
+/*!
+ * append data
+ */
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    [data_ appendData:data];
+}
+
+
+/*!
+ * did fail with error
+ */
+-(void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error{
+    NSLog(@"%s, %@", __PRETTY_FUNCTION__, error.description);
+}
+
+/*!
+ * did finish loading
+ */
+-(void)connectionDidFinishLoading:(NSURLConnection*)connection
+{
+    [client_ processAuthorizationResponse:data_];
+}
+
 #pragma mark - LROAuth2ClientDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [self minusDidLogin];
@@ -163,6 +216,7 @@
  */
 - (void)oauthClientDidReceiveAccessToken:(LROAuth2Client *)client{
     accessToken_ = client.accessToken;
+    [self minusDidLogin];
 }
 
 /*!

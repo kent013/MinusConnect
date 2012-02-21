@@ -88,7 +88,7 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
     }
     NSString* query = [pairs componentsJoinedByString:@"&"];
     
-    return [NSString stringWithFormat:@"%@%@%@", baseUrl, queryPrefix, query];
+    return [NSString stringWithFormat:@"%@%@%@&bearer_token=%@", baseUrl, queryPrefix, query, auth_.credential.accessToken];
 }
 
 /*!
@@ -206,8 +206,9 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password andPermission:(NSArray *)permission{
     if([auth_ isSessionValid] == NO){
         [auth_ loginWithUsername:username password:password andPermission:permission];
+    }else{
+        [self minusDidLogin];
     }
-    [self minusDidLogin];
 }
 
 /*!

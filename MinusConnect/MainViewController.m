@@ -70,7 +70,7 @@
 }
 
 - (void)request:(MinusRequest *)request didLoad:(id)result{
-    NSLog(@"did request loaded");
+    NSLog(@"did request loaded %@", result);
 }
 
 - (void)request:(MinusRequest *)request didLoadRawResponse:(NSData *)data{
