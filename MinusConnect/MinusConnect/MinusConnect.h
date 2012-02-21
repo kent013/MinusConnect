@@ -19,8 +19,7 @@
 
 @property(nonatomic, weak) id<MinusSessionDelegate> sessionDelegate;
 
-#pragma - authentication
-
+#pragma mark - authentication
 - (id)initWithClientId:(NSString *)clientId 
           clientSecret:(NSString *)clientSecret 
         callbackScheme:(NSString *)callbackScheme 
@@ -29,4 +28,10 @@
 - (void)login;
 - (void)logout;
 - (BOOL)isSessionValid;
+
+#pragma mark - api
+- (MinusRequest *) activeUserWithDelegate:(id<MinusRequestDelegate>) delegate;
+- (MinusRequest *) foldersWithDelegate:(id<MinusRequestDelegate>) delegate;
+- (MinusRequest *) createFileWithDelegate:(id<MinusRequestDelegate>) delegate;
+- (MinusRequest *) createFolderWithDelegate:(id<MinusRequestDelegate>) delegate;
 @end

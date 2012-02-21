@@ -39,7 +39,6 @@ static NSString *kMinusAccessToken = @"minusAuthToken";
 - (void)requestLoading:(MinusRequest*)request;
 - (void)request:(MinusRequest*)request didReceiveResponse:(NSURLResponse*)response;
 - (void)request:(MinusRequest*)request didFailWithError:(NSError*)error;
-- (void)request:(MinusRequest*)request didFailWithException:(NSException*)exception;
 - (void)request:(MinusRequest*)request didLoad:(id)result;
 - (void)request:(MinusRequest*)request didLoadRawResponse:(NSData*)data;
 - (void)request:(MinusRequest*)request didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;

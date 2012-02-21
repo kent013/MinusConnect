@@ -7,7 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LROAuth2AccessToken.h"
+#import "MinusProtocol.h"
 
-@interface MinusRequest : NSObject
+@interface MinusRequest : NSObject<NSURLConnectionDelegate, NSURLConnectionDataDelegate>{
+    __strong NSString *tag_;
+    __strong NSURLConnection *connection_;
+    __strong NSMutableData *data_;
+    __weak id<MinusRequestDelegate> delegate_;
+}
+@property (nonatomic, readonly) NSURL *url;
+@property (nonatomic, readonly) NSString *httpMethod;
+@property (nonatomic, readonly) NSURLConnection *connection;
+@property (nonatomic, strong) NSString *tag;
+@property (nonatomic, weak) id<MinusRequestDelegate> delegate;
 
+- (id)initWithURLRequest:(NSURLRequest*)request 
+             andDelegate:(id<MinusRequestDelegate>)aDelegate;
+-(void) cancel;
+-(void) start;
 @end
