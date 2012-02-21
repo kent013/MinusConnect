@@ -28,6 +28,7 @@
     __strong LROAuth2AccessToken *accessToken_;
     
     __strong MinusAuthWebViewController *authViewController_;
+    __strong UIWebView *webView_;
     id<MinusAuthDelegate> delegate_;
 }
 
@@ -35,7 +36,7 @@
           clientSecret:(NSString *)clientSecret 
         callbackScheme:(NSString *)callbackScheme 
            andDelegate:(id<MinusAuthDelegate>)delegate;
-- (void)login;
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password andPermission:(NSArray *)permission;
 - (void)logout;
 - (void)minusDidLogin;
 - (void)minusDidNotLogin;
@@ -53,4 +54,5 @@
 - (void)minusDidLogin;
 - (void)minusDidNotLogin;
 - (void)minusDidLogout;
+- (UIViewController *) requestForViewControllerToPresentAuthenticationView;
 @end

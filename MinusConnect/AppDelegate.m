@@ -12,6 +12,7 @@
 
 @synthesize window = _window;
 @synthesize mainViewController;
+@synthesize navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,7 +21,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.mainViewController = [[MainViewController alloc] init];
-    self.window.rootViewController = self.mainViewController;
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
 }

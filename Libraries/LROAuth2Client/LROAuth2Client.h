@@ -44,6 +44,7 @@
 - (NSURLRequest *)userAuthorizationRequestWithParameters:(NSDictionary *)additionalParameters;
 - (void)verifyAuthorizationWithAccessCode:(NSString *)accessCode;
 - (void)refreshAccessToken:(LROAuth2AccessToken *)_accessToken;
+- (void)processAuthorizationResponse:(NSData *)data;
 @end
 
 @interface LROAuth2Client (UIWebViewIntegration) <UIWebViewDelegate>

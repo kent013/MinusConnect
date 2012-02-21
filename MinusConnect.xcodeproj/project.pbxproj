@@ -57,6 +57,7 @@
 		7995E5E814F3B653005C1453 /* MinusAuthWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7995E5E514F3B64F005C1453 /* MinusAuthWebView.xib */; };
 		7995E5EC14F3B6D1005C1453 /* MinusAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5EB14F3B6D0005C1453 /* MinusAuthWebViewController.m */; };
 		7995E5F314F3C7A8005C1453 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5F214F3C7A7005C1453 /* MainViewController.m */; };
+		7995E60114F41B68005C1453 /* NSString+Join.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E60014F41B68005C1453 /* NSString+Join.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,8 @@
 		7995E5F114F3C7A5005C1453 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7995E5F214F3C7A7005C1453 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7995E5F514F3C92D005C1453 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
+		7995E5FF14F41B68005C1453 /* NSString+Join.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Join.h"; sourceTree = "<group>"; };
+		7995E60014F41B68005C1453 /* NSString+Join.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Join.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +316,8 @@
 				7995E57714F3A738005C1453 /* NSString+QueryString.m */,
 				7995E57814F3A738005C1453 /* NSURL+QueryInspector.h */,
 				7995E57914F3A738005C1453 /* NSURL+QueryInspector.m */,
+				7995E5FF14F41B68005C1453 /* NSString+Join.h */,
+				7995E60014F41B68005C1453 /* NSString+Join.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				7995E5D814F3B180005C1453 /* PDKeychainBindingsController.m in Sources */,
 				7995E5EC14F3B6D1005C1453 /* MinusAuthWebViewController.m in Sources */,
 				7995E5F314F3C7A8005C1453 /* MainViewController.m in Sources */,
+				7995E60114F41B68005C1453 /* NSString+Join.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

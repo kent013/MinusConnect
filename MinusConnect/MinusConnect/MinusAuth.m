@@ -8,6 +8,7 @@
 
 #import "MinusAuth.h"
 #import "PDKeychainBindings.h"
+#import "NSString+Join.h"
 
 //-----------------------------------------------------------------------------
 //Private Implementations
@@ -37,7 +38,7 @@
         clientSecret_ = clientSecret;
         callbackScheme_ = callbackScheme;
         delegate_ = delegate;
-        authViewController_ = [[MinusAuthWebViewController alloc] init];
+        //authViewController_ = [[MinusAuthWebViewController alloc] init];
     }
     return self;
 }
@@ -45,7 +46,7 @@
 /*!
  * login to minus, obtain request token
  */
--(void)login {
+-(void)loginWithUsername:(NSString *)username password:(NSString *)password andPermission:(NSArray *)permission {
     if([self isSessionValid]){
         [self minusDidLogin];
         return;
@@ -58,7 +59,22 @@
     client_.delegate = self;
     client_.userURL  = [NSURL URLWithString:kMinusOAuthRequestURL];
     client_.tokenURL = [NSURL URLWithString:kMinusOAuthAuthenticationURL];
-    [client_ authorizeUsingWebView:authViewController_.webView];
+    /* We dont need web view to be presented for now
+     UIViewController *viewController = [delegate_ requestForViewControllerToPresentAuthenticationView];
+    if([viewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navigationController = (UINavigationController *)viewController;
+        [navigationController pushViewController:authViewController_ animated:YES];
+    }else{
+        [viewController presentModalViewController:authViewController_ animated:YES];
+    }*/
+    webView_ = [[UIWebView alloc] init];
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSString join:permission glue:@" "], @"scope", 
+                            @"password", @"grant_type", 
+                            username, @"username",
+                            password, @"password",
+                            clientSecret_, @"client_secret", nil];
+    [client_ authorizeUsingWebView:webView_ additionalParameters:params];
+    //[client_ userAuthorizationRequestWithParameters:params];
 }
 
 /*!
@@ -105,7 +121,9 @@
 - (void)loadCredential{
     PDKeychainBindings *bindings = [PDKeychainBindings sharedKeychainBindings];
     NSData *data = [[bindings objectForKey:kMinusAccessToken] dataUsingEncoding:NSASCIIStringEncoding];
-    accessToken_ = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if(data != nil){
+        accessToken_ = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
 }
 
 /*!
@@ -133,6 +151,13 @@
 }
 
 #pragma mark - LROAuth2ClientDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [self minusDidLogin];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [self minusDidNotLogin];
+}
 /*!
  * server responds request token
  */

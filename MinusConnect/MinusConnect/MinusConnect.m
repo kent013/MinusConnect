@@ -203,9 +203,9 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 /*!
  * login
  */
-- (void)login{
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password andPermission:(NSArray *)permission{
     if([auth_ isSessionValid] == NO){
-        [auth_ login];
+        [auth_ loginWithUsername:username password:password andPermission:permission];
     }
     [self minusDidLogin];
 }
@@ -242,6 +242,13 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 - (void)minusDidNotLogin{
     [auth_ clearCredential];
     [self.sessionDelegate minusDidNotLogin];
+}
+
+/*!
+ * request for navigation controller
+ */
+- (UIViewController *)requestForViewControllerToPresentAuthenticationView{
+    return [self.sessionDelegate requestForViewControllerToPresentAuthenticationView];
 }
 
 /*!

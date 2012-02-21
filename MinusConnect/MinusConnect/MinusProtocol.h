@@ -12,7 +12,7 @@
  * endpoint urls
  */
 static NSString *kMinusBaseURL = @"https://minus.com/api/v2/";
-static NSString *kMinusOAuthRequestURL = @"https://minus.com/api/v2/";
+static NSString *kMinusOAuthRequestURL = @"https://minus.com/oauth/token";
 static NSString *kMinusOAuthAuthenticationURL = @"https://minus.com/oauth/token";
 
 /*!
@@ -29,6 +29,7 @@ static NSString *kMinusAccessToken = @"minusAuthToken";
 - (void)minusDidLogin;
 - (void)minusDidNotLogin;
 - (void)minusDidLogout;
+- (UIViewController *) requestForViewControllerToPresentAuthenticationView;
 @end
 
 /*!

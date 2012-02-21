@@ -25,7 +25,7 @@
         callbackScheme:(NSString *)callbackScheme 
            andDelegate:(id<MinusSessionDelegate>)delegate;
 
-- (void)login;
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password andPermission:(NSArray *)permission;
 - (void)logout;
 - (BOOL)isSessionValid;
 

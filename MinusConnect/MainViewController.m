@@ -31,19 +31,21 @@
         [testButton addTarget:self action:@selector(handleTestButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:testButton];
         
-        minus_ = [[MinusConnect alloc] initWithClientId:MINUS_SUBMITTER_CLIENT_ID
-                                           clientSecret:MINUS_SUBMITTER_CLIENT_SECRET 
-                                         callbackScheme:@"minusConnectTest://" 
-                                            andDelegate:self];
+        minus_ = [[MinusConnect alloc] 
+                  initWithClientId:MINUS_SUBMITTER_CLIENT_ID
+                  clientSecret:MINUS_SUBMITTER_CLIENT_SECRET 
+                  callbackScheme:@"minusConnectTest://" 
+                  andDelegate:self];
     }
     return self;
 }
 
 - (void) handleLoginButtonTapped:(UIButton *)sender{
-    [minus_ login];
+    [minus_ loginWithUsername:MINUS_USERNAME password:MINUS_PASSWORD andPermission:[NSArray arrayWithObjects:@"read_all", @"upload_new", nil]];
 }
 
 - (void) handleTestButtonTapped:(UIButton *)sender{
+    [minus_ activeUserWithDelegate:self];
 }
 
 - (void) handleLogoutButtonTapped:(UIButton *)sender{
@@ -92,6 +94,10 @@
  * attempt to login, but not logined
  */
 - (void)minusDidNotLogin{
+}
+
+- (UIViewController *)requestForViewControllerToPresentAuthenticationView{
+    return self.navigationController;
 }
 
 #pragma mark - View lifecycle

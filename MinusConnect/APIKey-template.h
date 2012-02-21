@@ -6,5 +6,7 @@
 //  Copyright (c) 2012 Kentaro ISHITOYA. All rights reserved.
 //
 
-#define MINUS_SUBMITTER_CLIENT_ID            @""
-#define MINUS_SUBMITTER_CLIENT_SECRET        @""
+#define MINUS_USERNAME                @""
+#define MINUS_PASSWORD                @""
+#define MINUS_SUBMITTER_CLIENT_ID     @""
+#define MINUS_SUBMITTER_CLIENT_SECRET @""

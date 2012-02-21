@@ -42,6 +42,21 @@
     return self;
 }
 
+- (void)loadView {
+    NSString *nibPath = nil;
+    NSBundle *nibBundle = [self nibBundle];
+    if (nibBundle == nil) {
+        nibBundle = [NSBundle mainBundle];
+    }
+    NSString *nibName = self.nibName;
+    if (nibName != nil) {
+        nibPath = [nibBundle pathForResource:nibName ofType:@"nib"];
+    }
+    if (nibPath != nil && [[NSFileManager defaultManager] fileExistsAtPath:nibPath]) {
+        [super loadView];
+    }
+}
+
 - (void)viewDidLoad{
     rightBarButtonItem_.customView = navButtonsView_;
     self.navigationItem.rightBarButtonItem = rightBarButtonItem_;

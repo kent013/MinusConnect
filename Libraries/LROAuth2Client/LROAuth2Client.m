@@ -76,7 +76,9 @@
     }
   }  
   NSURL *fullURL = [NSURL URLWithString:[[self.userURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
+    NSLog(@"%@", fullURL);
   NSMutableURLRequest *authRequest = [NSMutableURLRequest requestWithURL:fullURL];
+
   [authRequest setHTTPMethod:@"GET"];
 
   return [[authRequest copy] autorelease];
@@ -159,34 +161,36 @@
   if( [request isResponseCompressed]) {
     data = [ASIDataDecompressor uncompressData:rawData error:nil];
   }
-    
-  NSError *parseError = nil; 
-  SBJsonParser *parser = [[SBJsonParser alloc] init];
-  NSDictionary *authorizationData = [parser objectWithData:data];
-  
-  if (parseError) {
-    // try and decode the response body as a query string instead
-    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    authorizationData = [NSDictionary dictionaryWithFormEncodedString:responseString];
-    [responseString release];
-    if ([authorizationData valueForKey:@"access_token"] == nil) { 
-      // TODO handle complete parsing failure
-      NSAssert(NO, @"Unhandled parsing failure");
-    }
-  }  
-  if (accessToken == nil) {
-    accessToken = [[LROAuth2AccessToken alloc] initWithAuthorizationResponse:authorizationData];
-    if ([self.delegate respondsToSelector:@selector(oauthClientDidReceiveAccessToken:)]) {
-      [self.delegate oauthClientDidReceiveAccessToken:self];
-    } 
-  } else {
-    [accessToken refreshFromAuthorizationResponse:authorizationData];
-    if ([self.delegate respondsToSelector:@selector(oauthClientDidRefreshAccessToken:)]) {
-      [self.delegate oauthClientDidRefreshAccessToken:self];
-    }
-  }
+    [self processAuthorizationResponse:data];
 }
 
+- (void)processAuthorizationResponse:(NSData *)data{
+    NSError *parseError = nil; 
+    SBJsonParser *parser = [[SBJsonParser alloc] init];
+    NSDictionary *authorizationData = [parser objectWithData:data];
+    
+    if (parseError) {
+        // try and decode the response body as a query string instead
+        NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        authorizationData = [NSDictionary dictionaryWithFormEncodedString:responseString];
+        [responseString release];
+        if ([authorizationData valueForKey:@"access_token"] == nil) { 
+            // TODO handle complete parsing failure
+            NSAssert(NO, @"Unhandled parsing failure");
+        }
+    }  
+    if (accessToken == nil) {
+        accessToken = [[LROAuth2AccessToken alloc] initWithAuthorizationResponse:authorizationData];
+        if ([self.delegate respondsToSelector:@selector(oauthClientDidReceiveAccessToken:)]) {
+            [self.delegate oauthClientDidReceiveAccessToken:self];
+        } 
+    } else {
+        [accessToken refreshFromAuthorizationResponse:authorizationData];
+        if ([self.delegate respondsToSelector:@selector(oauthClientDidRefreshAccessToken:)]) {
+            [self.delegate oauthClientDidRefreshAccessToken:self];
+        }
+    } 
+}
 @end
 
 @implementation LROAuth2Client (UIWebViewIntegration)
@@ -262,6 +266,9 @@
   if ([self.delegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
     [self.delegate webViewDidFinishLoad:webView];
   }
+    
+    NSString *result = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.textContent"];
+    [self processAuthorizationResponse:[result dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)extractAccessCodeFromCallbackURL:(NSURL *)callbackURL;
