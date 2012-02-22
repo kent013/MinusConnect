@@ -16,6 +16,18 @@ static NSString *kMinusOAuthRequestURL = @"https://minus.com/oauth/token";
 static NSString *kMinusOAuthAuthenticationURL = @"https://minus.com/oauth/token";
 
 /*!
+ * request tags
+ */
+static NSString* kMinusRequestActiveUser = @"activeuser";
+static NSString* kMinusRequestUserWithUserId = @"userWithUserId";
+static NSString* kMinusRequestFileWithFileId = @"fileWithFileId";
+static NSString* kMinusRequestFilesWithFolderId = @"filesWithFolderId";
+static NSString* kMinusRequestCreateFile = @"createFile";
+static NSString* kMinusRequestFolderWithFolderId = @"folderWithFolderId";
+static NSString* kMinusRequestFolderWithUsername = @"folderWithUsername";
+static NSString* kMinusRequestCreateFolder = @"createFolder";
+
+/*!
  * credential keys
  */
 static NSString *kMinusAccessToken = @"minusAuthToken";

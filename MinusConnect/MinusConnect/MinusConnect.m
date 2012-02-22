@@ -14,6 +14,7 @@ static NSString* kHTTPGET = @"GET";
 static NSString* kHTTPPOST = @"POST";
 static NSString* kHTTPPUT = @"PUT";
 static NSString* kHTTPDELETE = @"DELETE";
+
 static const NSTimeInterval kTimeoutInterval = 180.0;
 
 //-----------------------------------------------------------------------------
@@ -27,11 +28,17 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
                httpMethod:(NSString *)httpMethod;
 - (NSString *)serializeURL:(NSString *)baseUrl
                     params:(NSDictionary *)params;
-- (NSMutableData *)generatePostBody:(NSDictionary *)params;
+- (NSMutableData *)generatePostBody:(NSDictionary *)params 
+                    dataContentType:(NSString*)dataContentType;
 - (MinusRequest *) createRequestWithURLString:(NSString *)url 
                                         param:(NSDictionary *)params 
-                                httpMethod:(NSString *)httpMethod
-                                 andDelegate:(id<MinusRequestDelegate>)delegate;
+                                   httpMethod:(NSString *)httpMethod
+                              dataContentType:(NSString *)dataContentType
+                                  andDelegate:(id<MinusRequestDelegate>)delegate;
+- (MinusRequest *) createRequestWithURLString:(NSString *)url 
+                                        param:(NSDictionary *)params 
+                                   httpMethod:(NSString *)httpMethod
+                                  andDelegate:(id<MinusRequestDelegate>)delegate;
 @end
 
 @implementation MinusConnect(PrivateImplementation)
@@ -94,7 +101,7 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 /*!
  * Generate body for POST method
  */
-- (NSMutableData *)generatePostBody:(NSDictionary *)params {
+- (NSMutableData *)generatePostBody:(NSDictionary *)params dataContentType:(NSString *)dataContentType{
     NSMutableData *body = [NSMutableData data];
     NSString *endLine = [NSString stringWithFormat:@"\r\n--%@\r\n", kStringBoundary];
     NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionary];
@@ -124,23 +131,21 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
         for (id key in dataDictionary) {
             NSObject *dataParam = [dataDictionary valueForKey:key];
             if ([dataParam isKindOfClass:[UIImage class]]) {
-                NSData* imageData = UIImageJPEGRepresentation((UIImage*)dataParam, 1.0);
+                dataParam = UIImageJPEGRepresentation((UIImage*)dataParam, 1.0);
+            }
+            NSAssert([dataParam isKindOfClass:[NSData class]],
+                     @"dataParam must be a UIImage or NSData");
+            [self utfAppendBody:body
+                           data:[NSString stringWithFormat:
+                                 @"Content-Disposition: form-data; filename=\"%@\"\r\n", key]];
+            if(dataContentType){
                 [self utfAppendBody:body
-                               data:[NSString stringWithFormat:
-                                     @"Content-Disposition: form-data; filename=\"%@\"\r\n", key]];
-                [self utfAppendBody:body
-                               data:[NSString stringWithString:@"Content-Type: image/jpeg\r\n\r\n"]];
-                [body appendData:imageData];
-            } else {
-                NSAssert([dataParam isKindOfClass:[NSData class]],
-                         @"dataParam must be a UIImage or NSData");
-                [self utfAppendBody:body
-                               data:[NSString stringWithFormat:
-                                     @"Content-Disposition: form-data; filename=\"%@\"\r\n", key]];
+                               data:[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", dataContentType]];
+            }else{
                 [self utfAppendBody:body
                                data:[NSString stringWithString:@"Content-Type: content/unknown\r\n\r\n"]];
-                [body appendData:(NSData*)dataParam];
             }
+            [body appendData:(NSData*)dataParam];
             [self utfAppendBody:body data:endLine];
             
         }
@@ -153,6 +158,13 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
  * create request
  */
 - (MinusRequest *) createRequestWithURLString:(NSString *)url param:(NSDictionary *)params httpMethod:(NSString *)httpMethod andDelegate:(id<MinusRequestDelegate>)delegate{
+    return [self createRequestWithURLString:url param:params httpMethod:httpMethod dataContentType:nil andDelegate:delegate];
+}
+
+/*!
+ * create request
+ */
+- (MinusRequest *)createRequestWithURLString:(NSString *)url param:(NSDictionary *)params httpMethod:(NSString *)httpMethod dataContentType:(NSString *)dataContentType andDelegate:(id<MinusRequestDelegate>)delegate{
     NSString *serializedUrl = [self serializeURL:url params:params httpMethod:httpMethod];
     NSMutableURLRequest* request =
     [NSMutableURLRequest requestWithURL:[NSURL URLWithString:serializedUrl]
@@ -167,11 +179,10 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
                                  stringWithFormat:@"multipart/form-data; boundary=%@", kStringBoundary];
         [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
         
-        [request setHTTPBody:[self generatePostBody:params]];
+        [request setHTTPBody:[self generatePostBody:params dataContentType:dataContentType]];
     }
-    return [[MinusRequest alloc] initWithURLRequest:request andDelegate:delegate];
+    return [[MinusRequest alloc] initWithURLRequest:request andDelegate:delegate];    
 }
-
 @end
 //-----------------------------------------------------------------------------
 //Public Implementations
@@ -259,14 +270,81 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
     return [auth_ isSessionValid];
 }
 
-#pragma mark - api
+#pragma mark - user
 /*!
  * get active user.
  */
 - (MinusRequest *)activeUserWithDelegate:(id<MinusRequestDelegate>) delegate{
-    MinusRequest *request = [self createRequestWithURLString:@"activeuser" param:nil httpMethod:@"GET" andDelegate:delegate];
+    MinusRequest *request = [self createRequestWithURLString:@"activeuser" param:nil httpMethod:kHTTPGET andDelegate:delegate];
+    request.tag = kMinusRequestActiveUser;
     [request start];
     return request;
+}
+
+/*!
+ * get user
+ */
+- (MinusRequest *)userWithUserId:(NSString *)userId andDelegate:(id<MinusRequestDelegate>)delegate{
+    NSString *path = [NSString stringWithFormat:@"users/%@", userId];
+    MinusRequest *request = [self createRequestWithURLString:path param:nil httpMethod:kHTTPGET andDelegate:delegate];
+    request.tag = kMinusRequestUserWithUserId;
+    [request start];
+    return request;    
+}
+
+#pragma mark - file
+/*!
+ * get file
+ */
+- (MinusRequest *)fileWithFileId:(NSString *)fileId andDelegate:(id<MinusRequestDelegate>)delegate{
+    NSString *path = [NSString stringWithFormat:@"files/%@", fileId];
+    MinusRequest *request = [self createRequestWithURLString:path param:nil httpMethod:kHTTPGET andDelegate:delegate];
+    request.tag = kMinusRequestFileWithFileId;
+    [request start];
+    return request;
+}
+
+/*!
+ * get files in a folder
+ */
+- (MinusRequest *)filesWithFolderId:(NSString *)folderId andDelegate:(id<MinusRequestDelegate>)delegate{
+    NSString *path = [NSString stringWithFormat:@"folders/%@/files", folderId];
+    MinusRequest *request = [self createRequestWithURLString:path param:nil httpMethod:kHTTPGET andDelegate:delegate];
+    
+    request.tag = kMinusRequestFilesWithFolderId;
+    [request start];
+    return request;    
+}
+
+/*!
+ * create file
+ */
+- (MinusRequest *)createFileWithFolderId:(NSString *)folderId 
+                                 caption:(NSString *)caption 
+                                filename:(NSString *)filename 
+                                    data:(id)data
+                         dataContentType:(NSString *)dataContentType 
+                             andDelegate:(id<MinusRequestDelegate>)delegate{
+    NSString *path = [NSString stringWithFormat:@"folders/%@/files", folderId];
+    NSDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:caption, @"caption", filename, @"filename", data, @"file", nil];
+    
+    MinusRequest *request = [self createRequestWithURLString:path param:param httpMethod:kHTTPPOST dataContentType:dataContentType andDelegate:delegate];
+    request.tag = kMinusRequestCreateFile;
+    [request start];
+    return request;
+}
+
+#pragma mark - folder
+/*!
+ * get folder
+ */
+- (MinusRequest *)folderWithFolderId:(NSString *)folderId andDelegate:(id<MinusRequestDelegate>)delegate{
+    NSString *path = [NSString stringWithFormat:@"folders/%@", folderId];
+    MinusRequest *request = [self createRequestWithURLString:path param:nil 
+                                                  httpMethod:kHTTPGET andDelegate:delegate];
+    request.tag = kMinusRequestFolderWithFolderId;
+    [request start];
+    return request;    
 }
 
 /*!
@@ -274,16 +352,11 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
  */
 - (MinusRequest *)foldersWithUsername:(NSString *)username andDelegate:(id<MinusRequestDelegate>) delegate{
     NSString *path = [NSString stringWithFormat:@"users/%@/folders", username];
-    MinusRequest *request = [self createRequestWithURLString:path param:nil httpMethod:@"GET" andDelegate:delegate];
+    MinusRequest *request = [self createRequestWithURLString:path param:nil 
+                                                  httpMethod:kHTTPGET andDelegate:delegate];
+    request.tag = kMinusRequestFolderWithUsername;
     [request start];
-    return nil;
-}
-
-/*!
- * create file
- */
-- (MinusRequest *)createFileWithDelegate:(id<MinusRequestDelegate>) delegate{
-    return nil;    
+    return request;
 }
 
 /*!
@@ -291,9 +364,14 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
  */
 - (MinusRequest *)createFolderWithUsername:(NSString *)username name:(NSString *)name isPublic:(BOOL)isPublic andDelegate:(id<MinusRequestDelegate>)delegate{
     NSString *path = [NSString stringWithFormat:@"users/%@/folders", username];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:name, @"name", [NSNumber numberWithBool:isPublic], "is_public", nil];
-    MinusRequest *request = [self createRequestWithURLString:path param:param httpMethod:@"POST" andDelegate:delegate];
+    NSString *isPublicStr = @"0";
+    if(isPublic){
+        isPublicStr = @"1";
+    }
+    NSDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:name, @"name", isPublicStr, @"is_public", nil];
+    MinusRequest *request = [self createRequestWithURLString:path param:param httpMethod:kHTTPPOST andDelegate:delegate];
+    request.tag = kMinusRequestCreateFolder;
     [request start];
-    return nil;
+    return request;
 }
 @end

@@ -46,8 +46,17 @@
 
 - (void) handleTestButtonTapped:(UIButton *)sender{
     [minus_ activeUserWithDelegate:self];
-    [minus_ foldersWithUsername:@"kent013" andDelegate:self];
-    //[minus_ createFolderWithUsername:@"kent013" name:@"test" isPublic:YES andDelegate:self];
+    //[minus_ userWithUserId:@"kent013" andDelegate:self];
+    
+    [minus_ folderWithFolderId:@"bfTQDBcmP" andDelegate:self];
+    //[minus_ foldersWithUsername:@"kent013" andDelegate:self];
+    //[minus_ createFolderWithUsername:@"kent013" name:@"test" isPublic:NO andDelegate:self];
+
+    //[minus_ filesWithFolderId:@"bfTQDBcmP" andDelegate:self];
+    //[minus_ fileWithFileId:@"C4KkzgTMA2a9" andDelegate:self];
+    /*UIImage *image = [UIImage imageNamed:@"sample1.jpg"];
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    [minus_ createFileWithFolderId:@"bfTQDBcmP" caption:@"test image" filename:@"sample1-1.jpg" data:data dataContentType:@"image/jpeg" andDelegate:self];*/
 }
 
 - (void) handleLogoutButtonTapped:(UIButton *)sender{
@@ -72,7 +81,11 @@
 }
 
 - (void)request:(MinusRequest *)request didLoad:(id)result{
-    NSLog(@"did request loaded %@", result);
+    if([request.tag isEqualToString:kMinusRequestActiveUser]){
+        NSLog(@"active! %@", result);
+    }else{
+        NSLog(@"did request loaded %@", result);
+    }
 }
 
 - (void)request:(MinusRequest *)request didLoadRawResponse:(NSData *)data{

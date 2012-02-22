@@ -58,6 +58,8 @@
 		7995E5EC14F3B6D1005C1453 /* MinusAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5EB14F3B6D0005C1453 /* MinusAuthWebViewController.m */; };
 		7995E5F314F3C7A8005C1453 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5F214F3C7A7005C1453 /* MainViewController.m */; };
 		7995E60114F41B68005C1453 /* NSString+Join.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E60014F41B68005C1453 /* NSString+Join.m */; };
+		7995E60614F49940005C1453 /* sample1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7995E60414F49940005C1453 /* sample1.jpg */; };
+		7995E60714F49940005C1453 /* sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7995E60514F49940005C1453 /* sample2.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +172,8 @@
 		7995E5F514F3C92D005C1453 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
 		7995E5FF14F41B68005C1453 /* NSString+Join.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Join.h"; sourceTree = "<group>"; };
 		7995E60014F41B68005C1453 /* NSString+Join.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Join.m"; sourceTree = "<group>"; };
+		7995E60414F49940005C1453 /* sample1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample1.jpg; sourceTree = "<group>"; };
+		7995E60514F49940005C1453 /* sample2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample2.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +211,7 @@
 				7995E56A14F3A72D005C1453 /* Libraries */,
 				7995E54114F3A6B4005C1453 /* MinusConnect */,
 				7995E55914F3A6B4005C1453 /* MinusConnectTests */,
+				7995E60214F4993F005C1453 /* Resources */,
 				7995E53A14F3A6B4005C1453 /* Frameworks */,
 				7995E53814F3A6B4005C1453 /* Products */,
 			);
@@ -418,6 +423,23 @@
 			path = PDKeychainBindingsController;
 			sourceTree = "<group>";
 		};
+		7995E60214F4993F005C1453 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7995E60314F49940005C1453 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7995E60314F49940005C1453 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7995E60414F49940005C1453 /* sample1.jpg */,
+				7995E60514F49940005C1453 /* sample2.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -490,6 +512,8 @@
 			files = (
 				7995E54614F3A6B4005C1453 /* InfoPlist.strings in Resources */,
 				7995E5E814F3B653005C1453 /* MinusAuthWebView.xib in Resources */,
+				7995E60614F49940005C1453 /* sample1.jpg in Resources */,
+				7995E60714F49940005C1453 /* sample2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
