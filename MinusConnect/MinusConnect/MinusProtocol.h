@@ -41,7 +41,6 @@ static NSString *kMinusAccessToken = @"minusAuthToken";
 - (void)minusDidLogin;
 - (void)minusDidNotLogin;
 - (void)minusDidLogout;
-- (UIViewController *) requestForViewControllerToPresentAuthenticationView;
 @end
 
 /*!

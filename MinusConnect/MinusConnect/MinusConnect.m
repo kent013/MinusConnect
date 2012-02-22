@@ -195,13 +195,11 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
  */
 - (id)initWithClientId:(NSString *)clientId 
           clientSecret:(NSString *)clientSecret 
-        callbackScheme:(NSString *)callbackScheme 
            andDelegate:(id<MinusSessionDelegate>)delegate{
     self = [super init];
     if(self){
         auth_ = [[MinusAuth alloc] initWithClientId:clientId
                                        clientSecret:clientSecret 
-                                     callbackScheme:callbackScheme
                                         andDelegate:self];
         self.sessionDelegate = delegate;
         [auth_ loadCredential];
@@ -254,13 +252,6 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
 - (void)minusDidNotLogin{
     [auth_ clearCredential];
     [self.sessionDelegate minusDidNotLogin];
-}
-
-/*!
- * request for navigation controller
- */
-- (UIViewController *)requestForViewControllerToPresentAuthenticationView{
-    return [self.sessionDelegate requestForViewControllerToPresentAuthenticationView];
 }
 
 /*!

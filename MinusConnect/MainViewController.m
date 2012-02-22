@@ -34,7 +34,6 @@
         minus_ = [[MinusConnect alloc] 
                   initWithClientId:MINUS_CLIENT_ID
                   clientSecret:MINUS_CLIENT_SECRET 
-                  callbackScheme:@"minusConnectTest://" 
                   andDelegate:self];
     }
     return self;
