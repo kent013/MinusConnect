@@ -47,15 +47,11 @@
 		7995E5CF14F3AE82005C1453 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5C214F3AE82005C1453 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7995E5D014F3AE82005C1453 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5C614F3AE82005C1453 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7995E5D114F3AE82005C1453 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5C814F3AE82005C1453 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7995E5D714F3B180005C1453 /* PDKeychainBindings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5D414F3B180005C1453 /* PDKeychainBindings.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7995E5D814F3B180005C1453 /* PDKeychainBindingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5D614F3B180005C1453 /* PDKeychainBindingsController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7995E5DA14F3B4A6005C1453 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7995E5D914F3B4A5005C1453 /* Security.framework */; };
 		7995E5DC14F3B4B5005C1453 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7995E5DB14F3B4B5005C1453 /* CFNetwork.framework */; };
 		7995E5DE14F3B4C7005C1453 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7995E5DD14F3B4C6005C1453 /* SystemConfiguration.framework */; };
 		7995E5E214F3B4DF005C1453 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7995E5E114F3B4DF005C1453 /* libz.dylib */; };
 		7995E5E414F3B559005C1453 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7995E5E314F3B559005C1453 /* MobileCoreServices.framework */; };
-		7995E5E814F3B653005C1453 /* MinusAuthWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7995E5E514F3B64F005C1453 /* MinusAuthWebView.xib */; };
-		7995E5EC14F3B6D1005C1453 /* MinusAuthWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5EB14F3B6D0005C1453 /* MinusAuthWebViewController.m */; };
 		7995E5F314F3C7A8005C1453 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E5F214F3C7A7005C1453 /* MainViewController.m */; };
 		7995E60114F41B68005C1453 /* NSString+Join.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E60014F41B68005C1453 /* NSString+Join.m */; };
 		7995E60614F49940005C1453 /* sample1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7995E60414F49940005C1453 /* sample1.jpg */; };
@@ -154,19 +150,12 @@
 		7995E5C714F3AE82005C1453 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
 		7995E5C814F3AE82005C1453 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
 		7995E5C914F3AE82005C1453 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
-		7995E5D314F3B180005C1453 /* PDKeychainBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeychainBindings.h; sourceTree = "<group>"; };
-		7995E5D414F3B180005C1453 /* PDKeychainBindings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeychainBindings.m; sourceTree = "<group>"; };
-		7995E5D514F3B180005C1453 /* PDKeychainBindingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDKeychainBindingsController.h; sourceTree = "<group>"; };
-		7995E5D614F3B180005C1453 /* PDKeychainBindingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDKeychainBindingsController.m; sourceTree = "<group>"; };
 		7995E5D914F3B4A5005C1453 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7995E5DB14F3B4B5005C1453 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7995E5DD14F3B4C6005C1453 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		7995E5DF14F3B4D0005C1453 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7995E5E114F3B4DF005C1453 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		7995E5E314F3B559005C1453 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		7995E5E514F3B64F005C1453 /* MinusAuthWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MinusAuthWebView.xib; sourceTree = "<group>"; };
-		7995E5EA14F3B6CE005C1453 /* MinusAuthWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinusAuthWebViewController.h; sourceTree = "<group>"; };
-		7995E5EB14F3B6D0005C1453 /* MinusAuthWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinusAuthWebViewController.m; sourceTree = "<group>"; };
 		7995E5F114F3C7A5005C1453 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		7995E5F214F3C7A7005C1453 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		7995E5F514F3C92D005C1453 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
@@ -291,7 +280,6 @@
 		7995E56A14F3A72D005C1453 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				7995E5D214F3B17F005C1453 /* PDKeychainBindingsController */,
 				7995E5B514F3AE82005C1453 /* ASIHTTPRequest */,
 				7995E5B114F3AE7A005C1453 /* Reachability */,
 				7995E58B14F3AD6E005C1453 /* json-framework */,
@@ -337,9 +325,6 @@
 				7995E58114F3A832005C1453 /* MinusAuth.h */,
 				7995E58214F3A832005C1453 /* MinusAuth.m */,
 				7995E58714F3A887005C1453 /* MinusProtocol.h */,
-				7995E5EA14F3B6CE005C1453 /* MinusAuthWebViewController.h */,
-				7995E5EB14F3B6D0005C1453 /* MinusAuthWebViewController.m */,
-				7995E5E514F3B64F005C1453 /* MinusAuthWebView.xib */,
 			);
 			path = MinusConnect;
 			sourceTree = "<group>";
@@ -410,17 +395,6 @@
 				7995E5C914F3AE82005C1453 /* ASIProgressDelegate.h */,
 			);
 			path = ASIHTTPRequest;
-			sourceTree = "<group>";
-		};
-		7995E5D214F3B17F005C1453 /* PDKeychainBindingsController */ = {
-			isa = PBXGroup;
-			children = (
-				7995E5D314F3B180005C1453 /* PDKeychainBindings.h */,
-				7995E5D414F3B180005C1453 /* PDKeychainBindings.m */,
-				7995E5D514F3B180005C1453 /* PDKeychainBindingsController.h */,
-				7995E5D614F3B180005C1453 /* PDKeychainBindingsController.m */,
-			);
-			path = PDKeychainBindingsController;
 			sourceTree = "<group>";
 		};
 		7995E60214F4993F005C1453 /* Resources */ = {
@@ -511,7 +485,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7995E54614F3A6B4005C1453 /* InfoPlist.strings in Resources */,
-				7995E5E814F3B653005C1453 /* MinusAuthWebView.xib in Resources */,
 				7995E60614F49940005C1453 /* sample1.jpg in Resources */,
 				7995E60714F49940005C1453 /* sample2.jpg in Resources */,
 			);
@@ -579,9 +552,6 @@
 				7995E5CF14F3AE82005C1453 /* ASIHTTPRequest.m in Sources */,
 				7995E5D014F3AE82005C1453 /* ASIInputStream.m in Sources */,
 				7995E5D114F3AE82005C1453 /* ASINetworkQueue.m in Sources */,
-				7995E5D714F3B180005C1453 /* PDKeychainBindings.m in Sources */,
-				7995E5D814F3B180005C1453 /* PDKeychainBindingsController.m in Sources */,
-				7995E5EC14F3B6D1005C1453 /* MinusAuthWebViewController.m in Sources */,
 				7995E5F314F3C7A8005C1453 /* MainViewController.m in Sources */,
 				7995E60114F41B68005C1453 /* NSString+Join.m in Sources */,
 			);

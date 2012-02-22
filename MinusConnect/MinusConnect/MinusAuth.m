@@ -39,7 +39,6 @@
         clientSecret_ = clientSecret;
         callbackScheme_ = callbackScheme;
         delegate_ = delegate;
-        //authViewController_ = [[MinusAuthWebViewController alloc] init];
     }
     return self;
 }
@@ -60,17 +59,6 @@
     client_.delegate = self;
     client_.userURL  = [NSURL URLWithString:kMinusOAuthRequestURL];
     client_.tokenURL = [NSURL URLWithString:kMinusOAuthAuthenticationURL];
-    /* We dont need web view to be presented for now
-     UIViewController *viewController = [delegate_ requestForViewControllerToPresentAuthenticationView];
-    if([viewController isKindOfClass:[UINavigationController class]]){
-        UINavigationController *navigationController = (UINavigationController *)viewController;
-        [navigationController pushViewController:authViewController_ animated:YES];
-    }else{
-        [viewController presentModalViewController:authViewController_ animated:YES];
-    }
-    webView_ = [[UIWebView alloc] init];
-    [client_ authorizeUsingWebView:webView_ additionalParameters:params];
-    */
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:[NSString join:permission glue:@" "], @"scope", 
                             @"password", @"grant_type", 
                             username, @"username",

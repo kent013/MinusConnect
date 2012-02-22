@@ -10,7 +10,6 @@
 #import "MinusProtocol.h"
 #import "LROAuth2Client.h"
 #import "LROAuth2AccessToken.h"
-#import "MinusAuthWebViewController.h"
 
 @protocol MinusAuthDelegate;
 
@@ -27,8 +26,6 @@
     __strong LROAuth2AccessToken *accessToken_;
     
     __strong NSMutableData *data_;
-    //__strong MinusAuthWebViewController *authViewController_;
-    //__strong UIWebView *webView_;
     id<MinusAuthDelegate> delegate_;
 }
 
