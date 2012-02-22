@@ -345,7 +345,7 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
     NSString *path = [NSString stringWithFormat:@"users/%@/folders", username];
     MinusRequest *request = [self createRequestWithURLString:path param:nil 
                                                   httpMethod:kHTTPGET andDelegate:delegate];
-    request.tag = kMinusRequestFolderWithUsername;
+    request.tag = kMinusRequestFoldersWithUsername;
     [request start];
     return request;
 }

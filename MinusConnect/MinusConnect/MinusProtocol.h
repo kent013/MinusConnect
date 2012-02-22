@@ -24,7 +24,7 @@ static NSString* kMinusRequestFileWithFileId = @"fileWithFileId";
 static NSString* kMinusRequestFilesWithFolderId = @"filesWithFolderId";
 static NSString* kMinusRequestCreateFile = @"createFile";
 static NSString* kMinusRequestFolderWithFolderId = @"folderWithFolderId";
-static NSString* kMinusRequestFolderWithUsername = @"folderWithUsername";
+static NSString* kMinusRequestFoldersWithUsername = @"folderWithUsername";
 static NSString* kMinusRequestCreateFolder = @"createFolder";
 
 /*!
