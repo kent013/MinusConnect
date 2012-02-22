@@ -32,8 +32,8 @@
         [self.view addSubview:testButton];
         
         minus_ = [[MinusConnect alloc] 
-                  initWithClientId:MINUS_SUBMITTER_CLIENT_ID
-                  clientSecret:MINUS_SUBMITTER_CLIENT_SECRET 
+                  initWithClientId:MINUS_CLIENT_ID
+                  clientSecret:MINUS_CLIENT_SECRET 
                   callbackScheme:@"minusConnectTest://" 
                   andDelegate:self];
     }
