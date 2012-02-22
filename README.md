@@ -41,31 +41,49 @@ Now you can call `[minus_ loginWithUsername:password:andPermission:]` method to 
 
     [minus_ loginWithUsername:MINUS_USERNAME password:MINUS_PASSWORD andPermission:[NSArray arrayWithObjects:@"read_all", @"upload_new", nil]];
 
-#### 3.3, MinusSessionDelegate
 
-    #pragma mark - MinusSessionDelegate
-    -(void)minusDidLogin{
-    }
-    - (void)minusDidLogout{
-    }
-    - (void)minusDidNotLogin{
-    }
-
-#### 3.4, send request 
-Now you can request to Minus API. You may implement MinusRequestDelegate to handle response from server. 
+#### 3.3, send request 
+Now you can request to Minus API. 
     [minus_ activeUserWithDelegate:self];
-    //[minus_ userWithUserId:@"kent013" andDelegate:self];
+    [minus_ userWithUserId:@"kent013" andDelegate:self];
     
     [minus_ folderWithFolderId:@"bfTQDBcmP" andDelegate:self];
-    //[minus_ foldersWithUsername:@"kent013" andDelegate:self];
-    //[minus_ createFolderWithUsername:@"kent013" name:@"test" isPublic:NO andDelegate:self];
+    [minus_ foldersWithUsername:@"kent013" andDelegate:self];
+    [minus_ createFolderWithUsername:@"kent013" name:@"test" isPublic:NO andDelegate:self];
 
-    //[minus_ filesWithFolderId:@"bfTQDBcmP" andDelegate:self];
-    //[minus_ fileWithFileId:@"C4KkzgTMA2a9" andDelegate:self];
-    /*UIImage *image = [UIImage imageNamed:@"sample1.jpg"];
+    [minus_ filesWithFolderId:@"bfTQDBcmP" andDelegate:self];
+    [minus_ fileWithFileId:@"C4KkzgTMA2a9" andDelegate:self];
+    UIImage *image = [UIImage imageNamed:@"sample1.jpg"];
     NSData *data = UIImageJPEGRepresentation(image, 1.0);
-    [minus_ createFileWithFolderId:@"bfTQDBcmP" caption:@"test image" filename:@"sample1-1.jpg" data:data dataContentType:@"image/jpeg" andDelegate:self];*/
+    [minus_ createFileWithFolderId:@"bfTQDBcmP" caption:@"test image" filename:@"sample1-1.jpg" data:data dataContentType:@"image/jpeg" andDelegate:self];
 
+You may implement MinusRequestDelegate to handle response from server. 
+    -(void)requestLoading:(MinusRequest *)request{
+        NSLog(@"start request");
+    }
+    - (void)request:(MinusRequest *)request didReceiveResponse:(NSURLResponse *)response{
+        NSLog(@"did received response");
+    }
+    - (void)request:(MinusRequest *)client 
+              didSendBodyData:(NSInteger)bytesWritten 
+            totalBytesWritten:(NSInteger)totalBytesWritten
+    totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite{
+        NSLog(@"progress:%f", (float)totalBytesWritten /
+                              (float)totalBytesExpectedToWrite);
+    }
+    - (void)request:(MinusRequest *)request didFailWithError:(NSError *)error{
+        NSLog(@"request failed with error:%@", error.description);
+    }
+    - (void)request:(MinusRequest *)request didLoad:(id)result{
+        if([request.tag isEqualToString:kMinusRequestActiveUser]){
+            NSLog(@"active! %@", result);
+        }else{
+            NSLog(@"did request loaded %@", result);
+        }
+    }
+    - (void)request:(MinusRequest *)request didLoadRawResponse:(NSData *)data{
+        NSLog(@"did request loaded(raw)");    
+    }
 
 License
 -------------------------------------
@@ -75,4 +93,18 @@ New BSD License. See [LICENSE](https://github.com/kent013/MinusConnect/blob/mast
 
 3rd Party Library Licenses
 ------------------------------------
-will be filled out later.
+ * [LROAuth2Client](https://github.com/lukeredpath/LROAuth2Client)  
+    Copyright (c) 2010 Luke Redpath  
+    LROAuth2Client is licensed under MIT License. You can see the full text of the license at [https://github.com/lukeredpath/LROAuth2Client/blob/master/MIT-LICENSE](https://github.com/lukeredpath/LROAuth2Client/blob/master/MIT-LICENSE)  
+
+ * [Reachability](http://developer.apple.com/library/ios/#samplecode/Reachability/Introduction/Intro.html)  
+    Copyright (c) 2010 Apple Inc. All Rights Reserved.  
+    See [http://developer.apple.com/library/ios/#samplecode/Reachability/Listings/ReadMe_txt.html](http://developer.apple.com/library/ios/#samplecode/Reachability/Listings/ReadMe_txt.html) for more detail.
+
+ * [ASIHTTPRequest](http://allseeing-i.com/ASIHTTPRequest/)  
+    Copyright (c) 2007-2011, All-Seeing Interactive.  
+    ASIHTTPRequest is licensed under BSD License. You can see the full text of the license at [https://github.com/pokeb/asi-http-request/blob/master/LICENSE](https://github.com/pokeb/asi-http-request/blob/master/LICENSE).
+
+ * [json-framework](https://github.com/stig/json-framework/)  
+    Copyright (c) 2007-2011 Stig Brautaset. All rights reserved.  
+    Json-framework is licensed under BSD License. You can see the full text of the license at [http://www.opensource.org/licenses/bsd-license.php](http://www.opensource.org/licenses/bsd-license.php)
