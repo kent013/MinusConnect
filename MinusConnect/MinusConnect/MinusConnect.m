@@ -317,6 +317,9 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
                          dataContentType:(NSString *)dataContentType 
                              andDelegate:(id<MinusRequestDelegate>)delegate{
     NSString *path = [NSString stringWithFormat:@"folders/%@/files", folderId];
+    if(caption == nil){
+        caption = @"";
+    }
     NSDictionary *param = [[NSMutableDictionary alloc] initWithObjectsAndKeys:caption, @"caption", filename, @"filename", data, @"file", nil];
     
     MinusRequest *request = [self createRequestWithURLString:path param:param httpMethod:kHTTPPOST dataContentType:dataContentType andDelegate:delegate];

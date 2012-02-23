@@ -7,7 +7,7 @@
 //
 
 //#import <YAJLIOS/NSObject+YAJL.h>
-#import "SBJson.h"
+#import "SBJsonParser.h"
 #import "LROAuth2Client.h"
 #import "ASIHTTPRequest.h"
 #import "ASIDataDecompressor.h"

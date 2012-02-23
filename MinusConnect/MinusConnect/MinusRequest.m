@@ -7,7 +7,7 @@
 //
 
 #import "MinusRequest.h"
-#import "SBJson.h"
+#import "SBJsonParser.h"
 
 //-----------------------------------------------------------------------------
 //Private Implementations

@@ -44,11 +44,11 @@
 }
 
 - (void) handleTestButtonTapped:(UIButton *)sender{
-    [minus_ activeUserWithDelegate:self];
+    //[minus_ activeUserWithDelegate:self];
     //[minus_ userWithUserId:@"kent013" andDelegate:self];
     
-    [minus_ folderWithFolderId:@"bfTQDBcmP" andDelegate:self];
-    //[minus_ foldersWithUsername:@"kent013" andDelegate:self];
+    //[minus_ folderWithFolderId:@"bfTQDBcmP" andDelegate:self];
+    [minus_ foldersWithUsername:@"kent013" andDelegate:self];
     //[minus_ createFolderWithUsername:@"kent013" name:@"test" isPublic:NO andDelegate:self];
 
     //[minus_ filesWithFolderId:@"bfTQDBcmP" andDelegate:self];
