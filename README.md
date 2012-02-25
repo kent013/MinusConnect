@@ -94,17 +94,9 @@ New BSD License. See [LICENSE](https://github.com/kent013/MinusConnect/blob/mast
 
 3rd Party Library Licenses
 ------------------------------------
- * [LROAuth2Client](https://github.com/lukeredpath/LROAuth2Client)  
-    Copyright (c) 2010 Luke Redpath  
-    LROAuth2Client is licensed under MIT License. You can see the full text of the license at [https://github.com/lukeredpath/LROAuth2Client/blob/master/MIT-LICENSE](https://github.com/lukeredpath/LROAuth2Client/blob/master/MIT-LICENSE)  
-
- * [Reachability](http://developer.apple.com/library/ios/#samplecode/Reachability/Introduction/Intro.html)  
-    Copyright (c) 2010 Apple Inc. All Rights Reserved.  
-    See [http://developer.apple.com/library/ios/#samplecode/Reachability/Listings/ReadMe_txt.html](http://developer.apple.com/library/ios/#samplecode/Reachability/Listings/ReadMe_txt.html) for more detail.
-
- * [ASIHTTPRequest](http://allseeing-i.com/ASIHTTPRequest/)  
-    Copyright (c) 2007-2011, All-Seeing Interactive.  
-    ASIHTTPRequest is licensed under BSD License. You can see the full text of the license at [https://github.com/pokeb/asi-http-request/blob/master/LICENSE](https://github.com/pokeb/asi-http-request/blob/master/LICENSE).
+ * [OAuth2Client](https://github.com/nxtbgthng/OAuth2Client)  
+    Copyright © 2010, nxtbgthng  
+    OAuth2Client is licensed under BSD License. You can see the full text of the license at [https://github.com/nxtbgthng/OAuth2Client](https://github.com/nxtbgthng/OAuth2Client)
 
  * [json-framework](https://github.com/stig/json-framework/)  
     Copyright (c) 2007-2011 Stig Brautaset. All rights reserved.  
