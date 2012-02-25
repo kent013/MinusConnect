@@ -25,9 +25,15 @@
         [logoutButton addTarget:self action:@selector(handleLogoutButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:logoutButton];
         
+        UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
+        [refreshButton setFrame:CGRectMake(self.view.frame.size.width / 2 - 40, self.view.frame.size.height / 2, 80, 30)];
+        [refreshButton addTarget:self action:@selector(handleRefreshButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:refreshButton];
+        
         UIButton *testButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [testButton setTitle:@"Test" forState:UIControlStateNormal];
-        [testButton setFrame:CGRectMake(self.view.frame.size.width / 2 - 40, self.view.frame.size.height / 2 + 5, 80, 30)];
+        [testButton setFrame:CGRectMake(self.view.frame.size.width / 2 - 40, self.view.frame.size.height / 2 + 35, 80, 30)];
         [testButton addTarget:self action:@selector(handleTestButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:testButton];
         
@@ -41,6 +47,13 @@
 
 - (void) handleLoginButtonTapped:(UIButton *)sender{
     [minus_ loginWithUsername:MINUS_USERNAME password:MINUS_PASSWORD andPermission:[NSArray arrayWithObjects:@"read_all", @"upload_new", nil]];
+}
+
+- (void) handleRefreshButtonTapped:(UIButton *)sender{
+    if([minus_ isSessionValid]){
+        return;
+    }
+    [minus_ refreshCredentialWithUsername:MINUS_USERNAME password:MINUS_PASSWORD andPermission:[NSArray arrayWithObjects:@"read_all", @"upload_new", nil]];
 }
 
 - (void) handleTestButtonTapped:(UIButton *)sender{
@@ -96,18 +109,21 @@
  * did login to minus
  */
 -(void)minusDidLogin{
+    NSLog(@"minus did login");
 }
 
 /*!
  * did logout from minus
  */
 - (void)minusDidLogout{
+    NSLog(@"minus did logout");
 }
 
 /*!
  * attempt to login, but not logined
  */
 - (void)minusDidNotLogin{
+    NSLog(@"minus did not login");
 }
 
 - (UIViewController *)requestForViewControllerToPresentAuthenticationView{
