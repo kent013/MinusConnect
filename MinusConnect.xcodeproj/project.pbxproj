@@ -18,9 +18,6 @@
 		7995E55614F3A6B4005C1453 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7995E53D14F3A6B4005C1453 /* Foundation.framework */; };
 		7995E55E14F3A6B4005C1453 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7995E55C14F3A6B4005C1453 /* InfoPlist.strings */; };
 		7995E56114F3A6B4005C1453 /* MinusConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E56014F3A6B4005C1453 /* MinusConnectTests.m */; };
-		7995E57A14F3A738005C1453 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E57514F3A738005C1453 /* NSDictionary+QueryString.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7995E57B14F3A738005C1453 /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E57714F3A738005C1453 /* NSString+QueryString.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7995E57C14F3A738005C1453 /* NSURL+QueryInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E57914F3A738005C1453 /* NSURL+QueryInspector.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7995E58014F3A76B005C1453 /* MinusConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E57F14F3A76B005C1453 /* MinusConnect.m */; };
 		7995E58514F3A832005C1453 /* MinusAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E58214F3A832005C1453 /* MinusAuth.m */; };
 		7995E58A14F3A8C6005C1453 /* MinusRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7995E58914F3A8C5005C1453 /* MinusRequest.m */; };
@@ -87,12 +84,6 @@
 		7995E55D14F3A6B4005C1453 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7995E55F14F3A6B4005C1453 /* MinusConnectTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinusConnectTests.h; sourceTree = "<group>"; };
 		7995E56014F3A6B4005C1453 /* MinusConnectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinusConnectTests.m; sourceTree = "<group>"; };
-		7995E57414F3A738005C1453 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
-		7995E57514F3A738005C1453 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
-		7995E57614F3A738005C1453 /* NSString+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QueryString.h"; sourceTree = "<group>"; };
-		7995E57714F3A738005C1453 /* NSString+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QueryString.m"; sourceTree = "<group>"; };
-		7995E57814F3A738005C1453 /* NSURL+QueryInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryInspector.h"; sourceTree = "<group>"; };
-		7995E57914F3A738005C1453 /* NSURL+QueryInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryInspector.m"; sourceTree = "<group>"; };
 		7995E57E14F3A76B005C1453 /* MinusConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinusConnect.h; sourceTree = "<group>"; };
 		7995E57F14F3A76B005C1453 /* MinusConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinusConnect.m; sourceTree = "<group>"; };
 		7995E58114F3A832005C1453 /* MinusAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinusAuth.h; sourceTree = "<group>"; };
@@ -295,12 +286,6 @@
 		7995E57314F3A738005C1453 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				7995E57414F3A738005C1453 /* NSDictionary+QueryString.h */,
-				7995E57514F3A738005C1453 /* NSDictionary+QueryString.m */,
-				7995E57614F3A738005C1453 /* NSString+QueryString.h */,
-				7995E57714F3A738005C1453 /* NSString+QueryString.m */,
-				7995E57814F3A738005C1453 /* NSURL+QueryInspector.h */,
-				7995E57914F3A738005C1453 /* NSURL+QueryInspector.m */,
 				7995E5FF14F41B68005C1453 /* NSString+Join.h */,
 				7995E60014F41B68005C1453 /* NSString+Join.m */,
 			);
@@ -520,9 +505,6 @@
 				7995E58014F3A76B005C1453 /* MinusConnect.m in Sources */,
 				7995E58514F3A832005C1453 /* MinusAuth.m in Sources */,
 				7995E58A14F3A8C6005C1453 /* MinusRequest.m in Sources */,
-				7995E57A14F3A738005C1453 /* NSDictionary+QueryString.m in Sources */,
-				7995E57B14F3A738005C1453 /* NSString+QueryString.m in Sources */,
-				7995E57C14F3A738005C1453 /* NSURL+QueryInspector.m in Sources */,
 				7995E5A514F3AD6E005C1453 /* NSObject+SBJson.m in Sources */,
 				7995E5A614F3AD6E005C1453 /* SBJsonParser.m in Sources */,
 				7995E5A714F3AD6E005C1453 /* SBJsonStreamParser.m in Sources */,
