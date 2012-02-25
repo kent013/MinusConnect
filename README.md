@@ -58,6 +58,7 @@ Now you can request to Minus API.
     [minus_ createFileWithFolderId:@"bfTQDBcmP" caption:@"test image" filename:@"sample1-1.jpg" data:data dataContentType:@"image/jpeg" andDelegate:self];
 
 You may implement MinusRequestDelegate to handle response from server. 
+
     -(void)requestLoading:(MinusRequest *)request{
         NSLog(@"start request");
     }
