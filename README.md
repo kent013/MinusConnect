@@ -27,13 +27,12 @@ Libraries are stored in [Libraries](https://github.com/kent013/MinusConnect/tree
 [MainViewController.m](https://github.com/kent013/MinusConnect/blob/master/MinusConnect/MainViewController.m)
 
 #### 3.1, initialize minus wrapper
-Initialize `MinusConnect` class as below. Where `MINUS_CLIENT_ID` and `MINUS_CLIENT_SECRET` are provided by minus. And `callbackScheme` is url scheme which you configured in your project(I think it is not needed for now). 
+Initialize `MinusConnect` class as below. Where `MINUS_CLIENT_ID` and `MINUS_CLIENT_SECRET` are provided by minus. 
 
     //create instance of MinusConnect
     minus_ = [[MinusConnect alloc] 
               initWithClientId:MINUS_CLIENT_ID
               clientSecret:MINUS_CLIENT_SECRET 
-              callbackScheme:nil 
               andDelegate:self];
 
 #### 3.2, login to minus
